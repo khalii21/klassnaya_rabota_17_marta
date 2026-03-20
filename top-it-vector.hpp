@@ -9,8 +9,14 @@ namespace khalikov
   {
     Vector();
     ~Vector();
+
+    bool isEmpty() const noexcept;
+
+
   private:
-    T * data;
-    size_t cap, size;
+    T * data_;
+    size_t cap_, size_;
   };
 }
+
+#endif
