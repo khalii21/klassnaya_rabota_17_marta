@@ -55,7 +55,7 @@ void khalikov::Vector< T >::popBack()
 	Vector< T > cpy(size_ - 1);
 	for(size_t i = 0; i < size_ - 1; i++)
 	{
-		cpy[i] = data_[i];
+		cpy.data_[i] = data_[i];
 		cpy.size_++;
 	}
 	swap(cpy);

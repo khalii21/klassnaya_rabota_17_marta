@@ -6,6 +6,7 @@ bool testPopBack()
 	khalikov::Vector< int > v;
 	bool pass = v.isEmpty();
 	v.pushBack(1);
+	v.pushBack(2);
 	pass = pass && !v.isEmpty();
 	v.popBack();
 	pass = pass && v.isEmpty();
