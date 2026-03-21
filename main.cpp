@@ -9,6 +9,7 @@ bool testPopBack()
 	v.pushBack(2);
 	pass = pass && !v.isEmpty();
 	v.popBack();
+	v.popBack();
 	pass = pass && v.isEmpty();
 	return pass;
 }
