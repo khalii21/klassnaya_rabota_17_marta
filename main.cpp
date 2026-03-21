@@ -5,6 +5,8 @@ bool testGetCapacity()
 {
 	khalikov::Vector< int > v;
 	bool pass = !v.getCapacity();
+	v.resize(5);
+	pass = pass && v.getCapacity() == 3;
 	return pass;
 }
 
