@@ -1,6 +1,17 @@
 #include "top-it-vector.hpp"
 #include <iostream>
 
+bool testGetSize()
+{
+	khalikov::Vector< int > v;
+	bool pass = v.isEmpty();
+	v.pushBack(1);
+	pass = pass && v.getSize() == 1;
+	v.pushBack(2);
+	pass = pass && v.getSize() == 4;
+	return pass;
+}
+
 bool testVectorWithValue()
 {
 	khalikov::Vector< int > v;
@@ -23,7 +34,8 @@ int main()
   using pair_t = std::pair< const char *, test_t >;
   pair_t tests[] = {
     {"Default vector should be empty", testDefaultVector},
-		{"Vector with any value is not empty", testVectorWithValue}
+		{"Vector with any value is not empty", testVectorWithValue},
+		{"Vector should have impl of getSize", testGetSize}
   };
   const size_t count = sizeof(tests) / sizeof(pair_t);
   std::cout << std::boolalpha;

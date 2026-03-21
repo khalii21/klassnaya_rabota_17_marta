@@ -127,14 +127,15 @@ void khalikov::Vector< T >::pushBack(const T & val)
 {
 	if (cap_ > size_)
 	{
-		(*this)[size_] = val;
+		data_[size_] = val;
 		size_++;
 	}
 	else
 	{
 		size_t newCapacity = cap_ + 5;
 		resize(newCapacity);
-		(*this)[size_++] = val;
+		data_[size_] = val;
+		size_++;
 	}
 }
 
