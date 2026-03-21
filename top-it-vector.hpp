@@ -50,6 +50,18 @@ bool khalikov::Vector< T >::isEmpty() const noexcept
 }
 
 template< class T >
+void khalikov::Vector< T >::popBack()
+{
+	Vector< T > cpy(size_ - 1);
+	for(size_t i = 0; i < size_ - 1; i++)
+	{
+		cpy[i] = data_[i];
+		cpy.size_++;
+	}
+	swap(cpy);
+}
+
+template< class T >
 khalikov::Vector< T >::Vector():
 	data_(nullptr),
 	cap_(0),

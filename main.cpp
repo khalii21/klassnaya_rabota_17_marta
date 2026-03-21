@@ -1,6 +1,17 @@
 #include "top-it-vector.hpp"
 #include <iostream>
 
+bool testPopBack()
+{
+	khalikov::Vector< int > v;
+	bool pass = v.isEmpty();
+	v.pushBack(1);
+	pass = pass && !v.isEmpty();
+	v.popBack();
+	pass = pass && v.isEmpty();
+	return pass;
+}
+
 bool testGetCapacity()
 {
 	khalikov::Vector< int > v;
@@ -45,7 +56,8 @@ int main()
     {"Default vector should be empty", testDefaultVector},
 		{"Vector with any value is not empty", testVectorWithValue},
 		{"Vector should have impl of getSize", testGetSize},
-		{"Vector should have impl of getCapacity", testGetCapacity}
+		{"Vector should have impl of getCapacity", testGetCapacity},
+		{"Vector can remove last element", testPopBack}
   };
   const size_t count = sizeof(tests) / sizeof(pair_t);
   std::cout << std::boolalpha;
