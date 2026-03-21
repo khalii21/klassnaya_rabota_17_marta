@@ -7,3 +7,6 @@ top-vec: main.o
 
 clean:
 	rm -rf *.d *.o top-vec
+
+run:
+	./top-vec

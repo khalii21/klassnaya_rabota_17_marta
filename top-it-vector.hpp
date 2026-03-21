@@ -13,6 +13,10 @@ namespace khalikov
     Vector< T > & operator=(const Vector< T > &) = delete;
 
     bool isEmpty() const noexcept;
+    void pushBack(const T &);
+    void popBack();
+    size_t getSize() const noexcept;
+    size_t getCapacity() const noexcept;
 
 
   private:
@@ -39,5 +43,9 @@ khalikov::Vector< T >::~Vector()
 {
 	delete[] data_;
 }
+
+template< class T >
+void khalikov::Vector< T >::pushBack(const T &)
+{}
 
 #endif
