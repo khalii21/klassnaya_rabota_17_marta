@@ -38,6 +38,12 @@ size_t khalikov::Vector< T >::getSize() const noexcept
 }
 
 template< class T >
+size_t khalikov::Vector< T >::getCapacity() const noexcept
+{
+	return cap_;
+}
+
+template< class T >
 bool khalikov::Vector< T >::isEmpty() const noexcept
 {
 	return !size_;
