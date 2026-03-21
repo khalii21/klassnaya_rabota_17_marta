@@ -1,6 +1,13 @@
 #include "top-it-vector.hpp"
 #include <iostream>
 
+bool testPushFront()
+{
+	khalikov::Vector< int > v;
+	bool pass = v.isEmpty();
+	return pass;
+}
+
 bool testPopBack()
 {
 	khalikov::Vector< int > v;
@@ -59,7 +66,8 @@ int main()
 		{"Vector with any value is not empty", testVectorWithValue},
 		{"Vector should have impl of getSize", testGetSize},
 		{"Vector should have impl of getCapacity", testGetCapacity},
-		{"Vector can remove last element", testPopBack}
+		{"Vector can remove last element", testPopBack},
+		{"Vector can pushFront", testPushFront}
   };
   const size_t count = sizeof(tests) / sizeof(pair_t);
   std::cout << std::boolalpha;

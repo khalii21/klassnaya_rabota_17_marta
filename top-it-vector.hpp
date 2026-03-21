@@ -24,6 +24,7 @@ namespace khalikov
     size_t getCapacity() const noexcept;
     void resize(size_t newCapacity);
 		void swap(Vector< T > & rhs) noexcept;
+		void pushFront(const T &);
 
   private:
     T * data_;
@@ -35,6 +36,20 @@ template< class T >
 size_t khalikov::Vector< T >::getSize() const noexcept
 {
 	return size_;
+}
+
+template< class T >
+void khalikov::Vector< T >::pushFront(const T & val)
+{
+	Vector< T > cpy(getSize() + 1);
+	cpy[0] = val;
+	cpy.size_++;
+	for(size_t i = 1; i < cpy.getSize(); i++)
+	{
+		cpy.data_[i] = data_[i-1];
+		cpy.size_++;
+	}
+	swap(cpy);
 }
 
 template< class T >
