@@ -2,6 +2,7 @@
 #define TOP_IT_VECTOR_HPP
 #include <cstddef>
 #include <utility>
+#include <cassert>
 
 namespace khalikov
 {
@@ -11,7 +12,7 @@ namespace khalikov
     Vector();
     explicit Vector(size_t k);
     ~Vector();
-    Vector(const Vector< T > &) = delete;
+    Vector(const Vector< T > &);
     Vector< T > & operator=(const Vector< T > & rhs);
     T & operator[](size_t id) noexcept;
     const T & operator[](size_t id) const noexcept;
@@ -21,13 +22,19 @@ namespace khalikov
     void popBack();
     size_t getSize() const noexcept;
     size_t getCapacity() const noexcept;
-    Vector< T > & resize(size_t newCapacity);
+    void resize(size_t newCapacity);
 		void swap(Vector< T > & rhs) noexcept;
 
   private:
     T * data_;
     size_t cap_, size_;
   };
+}
+
+template< class T >
+size_t khalikov::Vector< T >::getSize() const noexcept
+{
+	return size_;
 }
 
 template< class T >
@@ -57,11 +64,27 @@ khalikov::Vector< T >::~Vector()
 }
 
 template< class T >
+khalikov::Vector< T >::Vector(const Vector< T > & rhs):
+	data_(nullptr),
+	cap_(0),
+	size_(0)
+{
+	Vector< T > temp(rhs.cap_);
+	for(size_t i = 0; i < rhs.size_; i++)
+	{
+		temp[i] = rhs[i];
+	}
+	temp.size_ = rhs.size_;
+	swap(temp);
+}
+
+
+template< class T >
 void khalikov::Vector< T >::swap(Vector< T > & rhs) noexcept
 {
 	std::swap(rhs.data_, data_);
 	std::swap(rhs.size_, size_);
-	std::swap(rhs.capacity_, cap_);
+	std::swap(rhs.cap_, cap_);
 }
 
 template< class T >
@@ -73,23 +96,31 @@ khalikov::Vector< T > & khalikov::Vector< T >::operator=(const Vector< T > & rhs
 }
 
 template< class T >
-khalikov::Vector< T > & khalikov::Vector< T >::resize(size_t newCapacity)
+void khalikov::Vector< T >::resize(size_t newCapacity)
 {
 	Vector< T > res(newCapacity);
+	size_t index = 0;
 	for (size_t i = 0; i < size_; i++)
 	{
-		res[res.size_++] = (*this)[i];
+		res[index++] = (*this)[i];
 	}
-	return res;
+	res.size_ = index;
+	swap(res);
 }
 
 template< class T >
 T & khalikov::Vector< T >::operator[](size_t id) noexcept
-{}
+{
+	assert(id < getSize());
+	return data_[id];
+}
 
 template< class T >
 const T & khalikov::Vector< T >::operator[](size_t id) const noexcept
-{}
+{
+	assert(id < getSize());
+	return data_[id];
+}
 
 template< class T >
 void khalikov::Vector< T >::pushBack(const T & val)
@@ -103,8 +134,7 @@ void khalikov::Vector< T >::pushBack(const T & val)
 	{
 		size_t newCapacity = cap_ + 5;
 		resize(newCapacity);
-		(*this)[size_] = val;
-		size_++;
+		(*this)[size_++] = val;
 	}
 }
 
