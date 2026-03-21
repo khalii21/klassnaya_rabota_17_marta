@@ -8,7 +8,7 @@ bool testGetSize()
 	v.pushBack(1);
 	pass = pass && v.getSize() == 1;
 	v.pushBack(2);
-	pass = pass && v.getSize() == 4;
+	pass = pass && v.getSize() == 2;
 	return pass;
 }
 
