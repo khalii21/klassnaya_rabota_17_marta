@@ -24,14 +24,14 @@ namespace khalikov
 template< class T >
 bool khalikov::Vector< T >::isEmpty() const noexcept
 {
-	return false;
+	return !size_;
 }
 
 template< class T >
 khalikov::Vector< T >::Vector():
 	data_(nullptr),
-	size_(0),
-	cap_(0)
+	cap_(0),
+	size_(0)
 {}
 
 template< class T >
