@@ -5,6 +5,10 @@ bool testPushFront()
 {
 	khalikov::Vector< int > v;
 	bool pass = v.isEmpty();
+	v.pushFront(1);
+	pass = pass && v[0] == 1;
+	v.pushFront(2);
+	pass = pass && v[0] == 2;
 	return pass;
 }
 

@@ -42,7 +42,7 @@ template< class T >
 void khalikov::Vector< T >::pushFront(const T & val)
 {
 	Vector< T > cpy(getSize() + 1);
-	cpy[0] = val;
+	cpy.data_[0] = val;
 	cpy.size_++;
 	for(size_t i = 1; i < cpy.getSize(); i++)
 	{
