@@ -5,7 +5,9 @@ bool testVectorWithValue()
 {
 	khalikov::Vector< int > v;
 	v.pushBack(1);
-	return !v.isEmpty();
+	bool pass = !v.isEmpty();
+	pass = pass && v[0] == 1;
+	return pass;
 }
 
 
