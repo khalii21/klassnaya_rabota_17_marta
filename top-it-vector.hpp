@@ -43,12 +43,11 @@ void khalikov::Vector< T >::pushFront(const T & val)
 {
 	Vector< T > cpy(getSize() + 1);
 	cpy.data_[0] = val;
-	cpy.size_++;
-	for(size_t i = 1; i < cpy.getSize(); i++)
+	for(size_t i = 1; i < cpy.getSize(); ++i)
 	{
-		cpy.data_[i] = data_[i-1];
-		cpy.size_++;
+		cpy[i] = (*this)[i-1];
 	}
+	cpy.size_ = size_ + 1;
 	swap(cpy);
 }
 

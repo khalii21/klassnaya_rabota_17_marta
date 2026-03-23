@@ -1,6 +1,48 @@
 #include "top-it-vector.hpp"
 #include <iostream>
 
+bool testSwap()
+{
+	khalikov::Vector< size_t > v;
+	khalikov::Vector< size_t > yav;
+	v.pushBack(1);
+	v.pushBack(2);
+	v.pushBack(3);
+	v.pushBack(4);
+	v.pushBack(5);
+	yav.pushFront(1);
+	yav.pushFront(2);
+	yav.pushFront(3);
+	yav.pushFront(4);
+	yav.pushFront(5);
+	bool pass = true;
+	for (size_t i = 0; i < 5; i++)
+	{
+		if (v[i] == i + 1)
+		{
+			pass = pass && true;
+		}
+		else
+		{
+			pass = false;
+		}
+	}
+	v.swap(yav);
+	size_t index = 0;
+	for (size_t i = 5; i > 0; i--)
+	{
+		if (v[index++] == i)
+		{
+			pass = pass && true;
+		}
+		else
+		{
+			pass = false;
+		}
+	}
+	return pass;
+}
+
 bool testPushFront()
 {
 	khalikov::Vector< int > v;
@@ -71,7 +113,8 @@ int main()
 		{"Vector should have impl of getSize", testGetSize},
 		{"Vector should have impl of getCapacity", testGetCapacity},
 		{"Vector can remove last element", testPopBack},
-		{"Vector can pushFront", testPushFront}
+		{"Vector can pushFront", testPushFront},
+		{"Vector can swap with another vec", testSwap}
   };
   const size_t count = sizeof(tests) / sizeof(pair_t);
   std::cout << std::boolalpha;
