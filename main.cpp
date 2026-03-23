@@ -40,6 +40,10 @@ bool testSwap()
 			pass = false;
 		}
 	}
+	yav.pushBack(6);
+	v.swap(yav);
+	pass = pass && v.getSize() == 6;
+	pass = pass && v.getCapacity() != 5;
 	return pass;
 }
 

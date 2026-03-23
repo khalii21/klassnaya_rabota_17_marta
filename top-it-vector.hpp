@@ -134,7 +134,7 @@ void khalikov::Vector< T >::resize(size_t newCapacity)
 	size_t index = 0;
 	for (size_t i = 0; i < size_; i++)
 	{
-		res[index++] = (*this)[i];
+		res.data_[index++] = data_[i];
 	}
 	res.size_ = index;
 	swap(res);
