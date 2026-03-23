@@ -1,6 +1,19 @@
 #include "top-it-vector.hpp"
 #include <iostream>
 
+bool testCopyConstructor()
+{
+	khalikov::Vector< int > v;
+	v.pushBack(1);
+	khalikov::Vector< int > yav = v;
+	bool isAllEqual = v.getSize() == yav.getSize();
+	for (size_t i = 0; isAllEqual && i < v.getSize(); ++i)
+	{
+		isAllEqual = isAllEqual && v[i] == yav[i];
+	}
+	return isAllEqual;
+}
+
 bool testSwap()
 {
 	khalikov::Vector< int > v;
