@@ -104,7 +104,7 @@ khalikov::Vector< T >::Vector(const Vector< T > & rhs):
 	Vector< T > temp(rhs.cap_);
 	for(size_t i = 0; i < rhs.size_; i++)
 	{
-		temp[i] = rhs[i];
+		temp.data_[i] = rhs.data_[i];
 	}
 	temp.size_ = rhs.size_;
 	swap(temp);

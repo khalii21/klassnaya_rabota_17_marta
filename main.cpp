@@ -131,7 +131,8 @@ int main()
 		{"Vector should have impl of getCapacity", testGetCapacity},
 		{"Vector can remove last element", testPopBack},
 		{"Vector can pushFront", testPushFront},
-		{"Vector can swap with another vec", testSwap}
+		{"Vector can swap with another vec", testSwap},
+		{"Vector should have copyConstructor", testCopyConstructor}
   };
   const size_t count = sizeof(tests) / sizeof(pair_t);
   std::cout << std::boolalpha;
