@@ -3,8 +3,8 @@
 
 bool testSwap()
 {
-	khalikov::Vector< size_t > v;
-	khalikov::Vector< size_t > yav;
+	khalikov::Vector< int > v;
+	khalikov::Vector< int > yav;
 	v.pushBack(1);
 	v.pushBack(2);
 	v.pushBack(3);
