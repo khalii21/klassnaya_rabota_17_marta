@@ -16,6 +16,8 @@ namespace khalikov
     Vector< T > & operator=(const Vector< T > & rhs);
     T & operator[](size_t id) noexcept;
     const T & operator[](size_t id) const noexcept;
+		Vector(Vector< T > &&);
+		Vector< T > & operator=(Vector< T > &&) noexcept;
 
     bool isEmpty() const noexcept;
     void pushBack(const T &);
@@ -43,7 +45,7 @@ void khalikov::Vector< T >::pushFront(const T & val)
 {
 	Vector< T > cpy(getSize() + 1);
 	cpy.data_[0] = val;
-	for(size_t i = 1; i <= size_; ++i)
+	for (size_t i = 1; i <= size_; ++i)
 	{
 		cpy.data_[i] = data_[i-1];
 	}
@@ -67,7 +69,7 @@ template< class T >
 void khalikov::Vector< T >::popBack()
 {
 	Vector< T > cpy(size_ - 1);
-	for(size_t i = 0; i < size_ - 1; i++)
+	for (size_t i = 0; i < size_ - 1; i++)
 	{
 		cpy.data_[i] = data_[i];
 		cpy.size_++;
@@ -102,7 +104,7 @@ khalikov::Vector< T >::Vector(const Vector< T > & rhs):
 	size_(0)
 {
 	Vector< T > temp(rhs.cap_);
-	for(size_t i = 0; i < rhs.size_; i++)
+	for (size_t i = 0; i < rhs.size_; i++)
 	{
 		temp.data_[i] = rhs.data_[i];
 	}
@@ -110,6 +112,14 @@ khalikov::Vector< T >::Vector(const Vector< T > & rhs):
 	swap(temp);
 }
 
+template< class T >
+khalikov::Vector< T >::Vector(Vector< T > && rhs) noexcept:
+	data_(rhs.data_),
+	cap_(rhs.cap_),
+	size_(rhs.size_)
+{
+	rhs.data_ = nullptr;
+}
 
 template< class T >
 void khalikov::Vector< T >::swap(Vector< T > & rhs) noexcept
