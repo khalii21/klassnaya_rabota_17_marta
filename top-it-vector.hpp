@@ -121,6 +121,17 @@ khalikov::Vector< T >::Vector(Vector< T > && rhs) noexcept:
 	rhs.data_ = nullptr;
 }
 
+khalikov::Vector< T > & khalikov::Vector< T >::operator=(Vector< T > && rhs) noexcept
+{
+	if (this == std::addressof(rhs))
+	{
+		return *this;
+	}
+	Vector< T > cpy(std::move(rhs));
+	swap(cpy);
+	return *this;
+}
+
 template< class T >
 void khalikov::Vector< T >::swap(Vector< T > & rhs) noexcept
 {
@@ -132,6 +143,10 @@ void khalikov::Vector< T >::swap(Vector< T > & rhs) noexcept
 template< class T >
 khalikov::Vector< T > & khalikov::Vector< T >::operator=(const Vector< T > & rhs)
 {
+	if (this == std::addressof(rhs))
+	{
+		return *this;
+	}
 	Vector< T > cpy(rhs);
 	swap(rhs);
 	return *this;
