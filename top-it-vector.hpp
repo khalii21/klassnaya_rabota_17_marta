@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <utility>
 #include <cassert>
+#include <stdexcept>
 
 namespace khalikov
 {
@@ -27,6 +28,12 @@ namespace khalikov
     void resize(size_t newCapacity);
 		void swap(Vector< T > & rhs) noexcept;
 		void pushFront(const T &);
+		T & at(size_t id);
+		const T & at(size_t id) const;
+
+		void insert(size_t i, const T & val);
+		void erase(size_t i);
+		void insert(size_t i, const Vector< T > & rhs, size_t beg, size_t end);
 
   private:
     T * data_;
@@ -113,7 +120,7 @@ khalikov::Vector< T >::Vector(const Vector< T > & rhs):
 }
 
 template< class T >
-khalikov::Vector< T >::Vector(Vector< T > && rhs) noexcept:
+khalikov::Vector< T >::Vector(Vector< T > && rhs):
 	data_(rhs.data_),
 	cap_(rhs.cap_),
 	size_(rhs.size_)
@@ -121,6 +128,7 @@ khalikov::Vector< T >::Vector(Vector< T > && rhs) noexcept:
 	rhs.data_ = nullptr;
 }
 
+template< class T >
 khalikov::Vector< T > & khalikov::Vector< T >::operator=(Vector< T > && rhs) noexcept
 {
 	if (this == std::addressof(rhs))
@@ -168,8 +176,9 @@ void khalikov::Vector< T >::resize(size_t newCapacity)
 template< class T >
 T & khalikov::Vector< T >::operator[](size_t id) noexcept
 {
-	assert(id < getSize());
-	return data_[id];
+	const Vector< T > * cthis = this;
+	const T& ret = (*cthis)[id];
+	return const_cast< T & >(ret);
 }
 
 template< class T >
@@ -178,6 +187,25 @@ const T & khalikov::Vector< T >::operator[](size_t id) const noexcept
 	assert(id < getSize());
 	return data_[id];
 }
+
+template< class T >
+T& khalikov::Vector< T >::at(size_t id)
+{
+	const Vector< T > * cthis = this;
+	const T& ret = cthis->at(id);
+	return const_cast< T & >(ret);
+}
+
+template< class T >
+const T& khalikov::Vector< T >::at(size_t id) const
+{
+	if (id < getSize())
+	{
+		return (*this)[id];
+	}
+	throw std::range_error("bad_id");
+}
+
 
 template< class T >
 void khalikov::Vector< T >::pushBack(const T & val)

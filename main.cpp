@@ -1,6 +1,91 @@
 #include "top-it-vector.hpp"
 #include <iostream>
 
+bool testElementAccess()
+{
+	khalikov::Vector< int > v;
+	v.pushBack(1);
+	v.pushBack(2);
+	return v[0] == 1 && v[1] == 2;
+}
+
+bool testElementConstAccess()
+{
+	khalikov::Vector< int > v;
+	v.pushBack(1);
+	v.pushBack(2);
+	const khalikov::Vector< int > & rv = v;
+	return rv[0] == 1 && rv[1] == 2;
+}
+
+bool testElementOutOfBoundCheckedAccess()
+{
+	khalikov::Vector< int > v;
+	try
+	{
+		v.at(0);
+		return false;
+	}
+	catch (const std::out_of_range&)
+	{
+		return true;
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+bool testElementInBoundCheckedAccess()
+{
+	khalikov::Vector< int > v;
+	v.pushBack(1);
+	try
+	{
+		int & val = v.at(0);
+		return val == 1;
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+bool testElementOutOfBoundCheckedConstAccess()
+{
+	const khalikov::Vector< int > v;
+	try
+	{
+		v.at(0);
+		return false;
+	}
+	catch (const std::out_of_range&)
+	{
+		return true;
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+bool testElementInBoundCheckedConstAccess()
+{
+	khalikov::Vector< int > v;
+	v.pushBack(1);
+	const khalikov::Vector< int > & rv = v;
+	try
+	{
+		const int & val = rv.at(0);
+		return val == 1;
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+
 bool testCopyConstructor()
 {
 	khalikov::Vector< int > v;
